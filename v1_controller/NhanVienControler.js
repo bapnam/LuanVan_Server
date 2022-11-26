@@ -1,0 +1,53 @@
+const nhanvienModel = require("../v1_model/NhanVienModel");
+const bcrypt = require("bcrypt");
+
+const NhanVienController = {
+  // ADD
+  addNhanVien: async (req, res) => {
+    try {
+      const salt = await bcrypt.genSalt(10);
+      const hashed = await bcrypt.hash(req.body.MatKhau, salt);
+
+      // Create NV
+      const newNV = await new nhanvienModel(req.body);
+      newNV.MatKhau = hashed;
+      newNV.GioiTinh = req.body.GioiTinh.toUpperCase();
+
+      // Save DB
+      const NV = await newNV.save();
+      res.status(200).json(NV);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  // UPDATE
+  //   updateGioHang: async (req, res) => {
+  //     try {
+  //     } catch (error) {
+  //       console.log(error);
+  //       res.status(500).json(error);
+  //     }
+  //   },
+
+  //   // GET All
+  //   getAllGioHang: async (req, res) => {
+  //     try {
+  //     } catch (error) {
+  //       console.log(error);
+  //       res.status(500).json(error);
+  //     }
+  //   },
+
+  //   // GET 1
+  //   getOneGioHang: async (req, res) => {
+  //     try {
+  //     } catch (error) {
+  //       console.log(error);
+  //       res.status(500).json(error);
+  //     }
+  //   },
+};
+
+module.exports = NhanVienController;

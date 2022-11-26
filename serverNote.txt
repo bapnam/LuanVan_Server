@@ -1,0 +1,36 @@
+//*--------------------
+//          Ghi chú Server
+//*--------------------
+/*
+=== 1. install  (npm init)
+npm install express dotenv cors body-parser mongoose morgan
+npm install bcrypt
+npm install -g nodemon
+multer
+// npm install axios cheerio            *
+
+=== 2. Hàm 
+- updateTour: status
+	- price: update gia
+	
+
+- updateNguoiDung: status
+	- MatKhau: doi mat khau
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
