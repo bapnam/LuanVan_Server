@@ -22,32 +22,14 @@ const NhanVienController = {
     }
   },
 
-  // UPDATE
-  //   updateGioHang: async (req, res) => {
-  //     try {
-  //     } catch (error) {
-  //       console.log(error);
-  //       res.status(500).json(error);
-  //     }
-  //   },
-
-  //   // GET All
-  //   getAllGioHang: async (req, res) => {
-  //     try {
-  //     } catch (error) {
-  //       console.log(error);
-  //       res.status(500).json(error);
-  //     }
-  //   },
-
-  //   // GET 1
-  //   getOneGioHang: async (req, res) => {
-  //     try {
-  //     } catch (error) {
-  //       console.log(error);
-  //       res.status(500).json(error);
-  //     }
-  //   },
+  // delete
+  deleteNhanVien: async (req, res) => {
+    try {
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
 };
 
 module.exports = NhanVienController;

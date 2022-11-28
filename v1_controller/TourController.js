@@ -26,7 +26,7 @@ const TourController = {
     }
   },
 
-  // update 
+  // update
   updateTour: async (req, res) => {
     try {
       const status = req.body.status;
@@ -64,12 +64,49 @@ const TourController = {
           break;
         }
 
+        // update All
+        case "All": {
+          await tour.updateOne(req.body.newValue);
+          res.status(200).json("updated");
+          break;
+        }
         default: {
           // mac dinh khi k co status
           res.status(200).json("noUpdate");
           break;
         }
       }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  // Tim Kiem
+  searchTour: async (req, res) => {
+    try {
+      switch (req.body.status) {
+        case "TieuDe": {
+          break;
+        }
+
+        default: {
+          // mac dinh khi k co status
+          res.status(200).json("noSearch");
+          break;
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  // get all
+  getAll: async (req, res) => {
+    try {
+      const all = await TourModel.find().populate("LoaiTour", ["TenLoaiTour"]);
+      res.status(200).json(all);
     } catch (error) {
       console.log(error);
       res.status(500).json(error);

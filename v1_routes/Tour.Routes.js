@@ -5,8 +5,13 @@ const router = require("express").Router();
 // ADD
 router.post("/add", TourController.addTour);
 
-// update gia
+// get all
+router.get("/getall", TourController.getAll);
+
+// update
 router.put("/update", TourController.updateTour);
 
+// search
+router.get("/timkiem", TourController.searchTour);
 
 module.exports = router;

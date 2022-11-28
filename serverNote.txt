@@ -13,17 +13,18 @@ multer
 
 post 1 đối tượng:
 				{
-					status: ???
-					id: 
-					newValue: ""
+					status: "<>",
+					id: "<>",
+					newValue: "<>"
 				}
 
 - updateTour: status
+	- All : update nhiều cái
 	- Gia: update gia
 	- NguoiHuongDan: 
 	- LoaiTour
 	- LichTrinh
-	- 
+	- SoNgay
 	
 
 - updateNguoiDung: status
