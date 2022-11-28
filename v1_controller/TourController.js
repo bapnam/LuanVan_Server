@@ -34,21 +34,39 @@ const TourController = {
 
       switch (status) {
         // update gia
-        case "price": {
-          await tour.updateOne({ $set: { price: req.body.price } });
-          res.status(200).json("Update price done.");
+        case "Gia": {
+          await tour.updateOne({ $set: { Gia: req.body.newValue } });
+          res.status(200).json("updated");
           break;
         }
         // update nguoi huong dan
-        case "guider": {
-          await tour.updateOne({ $set: { guider: req.body.guider } });
-          res.status(200).json("Update guider done.");
+        case "NguoiHuongDan": {
+          await tour.updateOne({ $set: { NguoiHuongDan: req.body.newValue } });
+          res.status(200).json("updated");
+          break;
+        }
+        // update Loai tour
+        case "LoaiTour": {
+          await tour.updateOne({ $set: { LoaiTour: req.body.newValue } });
+          res.status(200).json("updated");
+          break;
+        }
+        // update Lich Trinh
+        case "LichTrinh": {
+          await tour.updateOne({ $set: { LichTrinh: req.body.newValue } });
+          res.status(200).json("updated");
+          break;
+        }
+        // update So ngay
+        case "SoNgay": {
+          await tour.updateOne({ $set: { SoNgay: req.body.newValue } });
+          res.status(200).json("updated");
           break;
         }
 
         default: {
           // mac dinh khi k co status
-          res.status(200).json("Update khong hop le!");
+          res.status(200).json("noUpdate");
           break;
         }
       }

@@ -49,5 +49,5 @@ app.use("/v1/tour", TourTouter);
 //LOG---
 //
 app.listen(port, () => {
-  console.log("--- Server is running port +" + port + "...");
+  console.log("--- Server is running port " + port + "...");
 });

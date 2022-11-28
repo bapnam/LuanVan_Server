@@ -3,74 +3,76 @@ const mongoose = require("mongoose");
 // Create Nhan Vien Schema
 const TourSchema = new mongoose.Schema(
   {
-    title: {
+    TieuDe: {
       // Hiển thị tiêu đề
       type: String,
-      required: true,
-      trim: true,
+      // required: true,
+      // trim: true,
     },
-    category: {
+    LoaiTour: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "LoaiTour",
     },
-    content: {
+    MoTa: {
       // Thông tin địa điểm mo ta
       type: String,
-      required: true,
-      trim: true,
+      // required: true,
+      // trim: true,
     },
-    place: {
+    DiaDiem: {
       // Địa điểm hiển thị trên card di den
       type: String,
-      required: true,
-      trfim: true,
+      // required: true,
+      // trfim: true,
     },
 
-    city: {
+    ThanhPho: {
       // thanh pho den
       type: String,
-      required: true,
-      trim: true,
+      // required: true,
+      // trim: true,
     },
-    schedule: {
+    LichTrinh: {
       // lich trinh
       type: String,
-      required: true,
-      trim: true,
+      // required: true,
+      // trim: true,
     },
-    hotel: {
+    KhachSan: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "KhachSan",
     },
-    guider: {
+    NguoiHuongDan: {
       // nguoi huong dan
       type: String,
       // required: true,
     },
 
-    startDate: {
+    SoNgay: {
+      // So ngay di dự kiến
       type: String,
-      required: true,
+      // required: true,
     },
-    endDate: {
-      type: String,
-      required: true,
-    },
-    price: {
+    // endDate: {
+    //   type: String,
+    //   required: true,
+    // },
+    Gia: {
+      // Giá tour / ngày
       type: Number,
-      required: true,
+      // required: true,
     },
     email: {
       // email nguoi dang tour
       type: String,
-      required: true,
+      // required: true,
     },
-    phone: {
+    SDT: {
       // sdt nguoi dang tour
       type: Number,
-      required: true,
+      // required: true,
     },
-    thumbnail: {
+    HinhAnh: {
       // Hình ảnh hiển thị
       type: Object,
       url: {

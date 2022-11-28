@@ -9,9 +9,21 @@ npm install -g nodemon
 multer
 // npm install axios cheerio            *
 
-=== 2. Hàm 
+=== 2. Update
+
+post 1 đối tượng:
+				{
+					status: ???
+					id: 
+					newValue: ""
+				}
+
 - updateTour: status
-	- price: update gia
+	- Gia: update gia
+	- NguoiHuongDan: 
+	- LoaiTour
+	- LichTrinh
+	- 
 	
 
 - updateNguoiDung: status

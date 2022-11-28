@@ -22,7 +22,7 @@ const NguoiDungController = {
     }
   },
 
-  // Get one
+  // Get one or dang nhap
   getOne: async (req, res) => {
     try {
       const nd = await nguoidungModel.findOne({ SDT: req.body.SDT });
@@ -58,12 +58,12 @@ const NguoiDungController = {
     try {
       const status = req.body.status;
       const nd = await nguoidungModel.findById(req.body.id);
-      const salt = await bcrypt.genSalt(10);
-      const hashed = await bcrypt.hash(req.body.MatKhau, salt);
 
       switch (status) {
         // update Mat Khau, doi mat khau
         case "MatKhau": {
+          const salt = await bcrypt.genSalt(10);
+          const hashed = await bcrypt.hash(req.body.newValue, salt);
           await nd.updateOne({ $set: { MatKhau: hashed } });
           res.status(200).json("Update MatKhau done.");
           break;
