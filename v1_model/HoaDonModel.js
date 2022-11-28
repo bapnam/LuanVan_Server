@@ -20,6 +20,9 @@ const hoaDonSchema = new mongoose.Schema(
         ref: "KhachSan",
       },
     },
+    SoLuongKhach: {
+      type: Number,
+    },
     // PhuongThuc_TT: {
     //   type: mongoose.Schema.Types.ObjectId,
     //   ref: "PhuongThucThanhToan",

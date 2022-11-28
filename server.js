@@ -40,7 +40,7 @@ mongoose.connect(process.env.MONGODB_URL, { dbName: "LuanVan" }, () => {
 //
 
 app.use("/v1/hoadon", HoaDonTouter);
-// app.use("/v1/khachsan", KhachSanTouterTouter)
+app.use("/v1/khachsan", KhachSanTouter)
 app.use("/v1/loaitour", LoaiTourTouter);
 app.use("/v1/nguoidung", NguoiDungTouter);
 app.use("/v1/nhanvien", NhanVienRouter);

@@ -11,13 +11,17 @@ const HoaDonController = {
         .split("/")
         .reverse()
         .join("");
-      const maHoaDon = d + "HD" + (dsHoaDon.length + 1);
+      const maHoaDon =
+        d +
+        "HD" +
+        (dsHoaDon.length + 1) +
+        (Math.floor(Math.random() * 1000) + 1);
 
       const newHD = new hoadonModel(req.body);
       newHD.MaHoaDon = maHoaDon;
 
       // Save DB
-      const HD = await newHD.save();
+      // const HD = await newHD.save();
       res.status(200).json(newHD);
     } catch (error) {
       console.log(error);
