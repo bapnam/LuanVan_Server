@@ -66,7 +66,7 @@ const TourController = {
 
         // update All
         case "All": {
-          await tour.updateOne(req.body.newValue);
+          await tour.updateOne({ $set: req.body.newValue });
           res.status(200).json("updated");
           break;
         }

@@ -25,6 +25,31 @@ const HoaDonController = {
     }
   },
 
+  // update
+  updateHoaDon: async (req, res) => {
+    try {
+      const hd = await hoadonModel.findById(req.body.id);
+      await hd.updateOne({ $set: req.body.newValue });
+
+      res.status(200).json("updated");
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  // delete
+  deleteHoaDon: async (req, res) => {
+    try {
+      await hoadonModel.findByIdAndDelete(req.params.id);
+
+      res.status(200).json("deleted");
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
   // get all
   getAll: async (req, res) => {
     try {
@@ -39,13 +64,30 @@ const HoaDonController = {
     }
   },
 
-  // update
-  update: async (req, res) => {
+  // get by id
+  getByID: async (req, res) => {
     try {
-      const hd = await hoadonModel.findById(req.body.id);
-      await hd.updateOne(req.body.newValue);
+      const hd = await hoadonModel
+        .findById(req.params.id)
+        .populate("IDKhachHang", ["HoTen"])
+        .populate({ path: "IDSanPham", populate: "Tour" });
 
-      res.status(200).json("updated");
+      res.status(200).json(hd);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  // get by MaHoaDon
+  getByMaHoaDon: async (req, res) => {
+    try {
+      const hd = await hoadonModel
+        .find({ MaHoaDon: req.params.id })
+        .populate("IDKhachHang", ["HoTen"])
+        .populate({ path: "IDSanPham", populate: "Tour" });
+
+      res.status(200).json(hd);
     } catch (error) {
       console.log(error);
       res.status(500).json(error);
