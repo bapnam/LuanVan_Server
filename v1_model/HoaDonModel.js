@@ -13,7 +13,7 @@ const hoaDonSchema = new mongoose.Schema(
     IDSanPham: {
       Tour: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "SanPham",
+        ref: "Tour",
       },
       KhachSan: {
         type: mongoose.Schema.Types.ObjectId,

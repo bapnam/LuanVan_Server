@@ -14,4 +14,7 @@ router.put("/update", TourController.updateTour);
 // search
 router.get("/timkiem", TourController.searchTour);
 
+// delete
+router.delete("/delete/:id", TourController.deleteTour);
+
 module.exports = router;

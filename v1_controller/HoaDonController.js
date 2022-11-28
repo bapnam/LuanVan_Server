@@ -11,14 +11,41 @@ const HoaDonController = {
         .split("/")
         .reverse()
         .join("");
-      const maHoaDon = "HD" + d + (dsHoaDon.length + 1);
+      const maHoaDon = d + "HD" + (dsHoaDon.length + 1);
 
-      const newHD = new hoadonModel(req.body)
-      newHD.MaHoaDon = maHoaDon
+      const newHD = new hoadonModel(req.body);
+      newHD.MaHoaDon = maHoaDon;
 
       // Save DB
-        const HD = await newHD.save();
+      const HD = await newHD.save();
       res.status(200).json(newHD);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  // get all
+  getAll: async (req, res) => {
+    try {
+      const allHD = await hoadonModel
+        .find()
+        .populate("IDKhachHang", ["HoTen"])
+        .populate({ path: "IDSanPham", populate: "Tour" });
+      res.status(200).json(allHD);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  // update
+  update: async (req, res) => {
+    try {
+      const hd = await hoadonModel.findById(req.body.id);
+      await hd.updateOne(req.body.newValue);
+
+      res.status(200).json("updated");
     } catch (error) {
       console.log(error);
       res.status(500).json(error);
