@@ -56,31 +56,17 @@ const NguoiDungController = {
   // update
   updateNguoiDung: async (req, res) => {
     try {
-      const status = req.body.status;
-      const nd = await nguoidungModel.findById(req.body.id);
+      const nd = await nguoidungModel.findById(req.params.id);
 
-      switch (status) {
-        // update Mat Khau, doi mat khau
-        case "MatKhau": {
-          const salt = await bcrypt.genSalt(10);
-          const hashed = await bcrypt.hash(req.body.newValue, salt);
-          await nd.updateOne({ $set: { MatKhau: hashed } });
-          res.status(200).json("Update MatKhau done.");
-          break;
-        }
-        // update nguoi huong dan
-        // case "guider": {
-        //   await nd.updateOne({ $set: { guider: req.body.guider } });
-        //   res.status(200).json("Update guider done.");
-        //   break;
-        // }
-
-        default: {
-          // mac dinh khi k co status
-          res.status(200).json("Update khong hop le!");
-          break;
-        }
+      if (req.body.MatKhau != "") {
+        const salt = await bcrypt.genSalt(10);
+        const hashed = await bcrypt.hash(req.body.MatKhau, salt);
+        await nd.updateOne({ $set: { MatKhau: hashed } });
+      } else {
+        await nd.updateOne(req.body);
       }
+
+      res.status(200).json("updated");
     } catch (error) {
       console.log(error);
       res.status(500).json(error);

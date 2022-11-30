@@ -74,13 +74,7 @@ const TourSchema = new mongoose.Schema(
     },
     HinhAnh: {
       // Hình ảnh hiển thị
-      type: Object,
-      url: {
-        type: URL,
-      },
-      public_id: {
-        type: String,
-      },
+      type: String,
     },
   },
   { timestamps: true }

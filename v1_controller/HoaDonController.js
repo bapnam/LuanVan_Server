@@ -32,8 +32,8 @@ const HoaDonController = {
   // update
   updateHoaDon: async (req, res) => {
     try {
-      const hd = await hoadonModel.findById(req.body.id);
-      await hd.updateOne({ $set: req.body.newValue });
+      const hd = await hoadonModel.findById(req.params.id);
+      await hd.updateOne({ $set: req.body });
 
       res.status(200).json("updated");
     } catch (error) {
@@ -87,7 +87,7 @@ const HoaDonController = {
   getByMaHoaDon: async (req, res) => {
     try {
       const hd = await hoadonModel
-        .find({ MaHoaDon: req.params.id })
+        .find({ MaHoaDon: req.params.mahoadon })
         .populate("IDKhachHang", ["HoTen"])
         .populate({ path: "IDSanPham", populate: "Tour" });
 

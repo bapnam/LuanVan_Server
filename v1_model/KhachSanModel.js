@@ -13,6 +13,25 @@ const KhachSanSchema = new mongoose.Schema(
       XaPhuong: { type: String },
       ChiTiet: { type: String },
     },
+    Phong: [
+      {
+        LoaiPhong: {
+          type: String,
+        },
+        LoaiGiuong: {
+          type: String,
+        },
+        GiaPhong: {
+          type: Number,
+        },
+        SoLuong: {
+          type: Number,
+        },
+        HinhAnhPhong: {
+          type: String,
+        },
+      },
+    ],
     SDT: {
       type: String,
       required: true,
@@ -22,8 +41,11 @@ const KhachSanSchema = new mongoose.Schema(
       type: String,
     },
     MoTa: {
-      type: String
-    }
+      type: String,
+    },
+    HinhAnhKS: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

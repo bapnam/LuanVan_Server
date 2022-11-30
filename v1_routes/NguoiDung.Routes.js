@@ -5,10 +5,11 @@ const router = require("express").Router();
 // ADD
 router.post("/add", NguoiDungController.addNguoiDung);
 
-// update
-router.put("/update", NguoiDungController.updateNguoiDung);
-
 // get one 
 router.get("/dangnhap", NguoiDungController.getOne);
+
+// update
+router.put("/update/:id", NguoiDungController.updateNguoiDung);
+
 
 module.exports = router;

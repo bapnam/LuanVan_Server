@@ -10,11 +10,10 @@ router.get("/getall", HoaDonController.getAll);
 // get by id
 router.get("/getbyid/:id", HoaDonController.getByID);
 // get by id
-router.get("/getbymahoadon/:id", HoaDonController.getByMaHoaDon);
-
+router.get("/getbymahoadon/:mahoadon", HoaDonController.getByMaHoaDon);
 
 // update
-router.put("/update", HoaDonController.updateHoaDon);
+router.put("/update/:id", HoaDonController.updateHoaDon);
 
 // delete
 router.delete("/delete/:id", HoaDonController.deleteHoaDon);

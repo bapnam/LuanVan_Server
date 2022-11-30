@@ -13,7 +13,7 @@ router.get("/getbyid/:id", KhachSanController.getByID);
 router.get("/getbycity/:tp", KhachSanController.getByCity);
 
 // update
-// router.put("/update", HoaDonController.updateHoaDon);
+router.put("/update/:id", KhachSanController.updateKhachSan);
 
 // delete
 router.delete("/delete/:id", KhachSanController.deleteKhachSan);
