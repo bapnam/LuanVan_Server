@@ -4,21 +4,17 @@ const TourController = {
   // ADD
   addTour: async (req, res) => {
     try {
-      const file = req;
-      console.log("FILE: +> ",file);
-
-      // var i = file.originalname.lastIndexOf(".");
-      // var str = file.originalname.slice(i);
-      // var nameImg = file.originalname.slice(0, i) + str;
-
+      const file = req.file;
+      var nameImg = file.originalname;
 
       const newTour = new TourModel(req.body);
-      newTour.HinhAnh = "nameImg"
+      newTour.HinhAnh = nameImg;
+
+      console.log("FILE1: +> ", newTour);
 
       // Save DB
-      // const tour = await newTour.save();
-      
-      res.status(200).json(file);
+      const tour = await newTour.save();
+      res.status(200).json(newTour);
     } catch (error) {
       console.log(error);
       res.status(500).json(error);

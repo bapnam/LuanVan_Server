@@ -1,25 +1,20 @@
 const TourController = require("../v1_controller/TourController");
-const multer = require("multer")
+const multer = require("multer");
 const router = require("express").Router();
 
 // SET STORAGE
 var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      console.log("1111111: ", file);
-      cb(null, "publics/images/");
-    },
-    filename: function (req, file, cb) {
-      
-    //   var i = file.originalname.lastIndexOf(".")
-    //   var str = file.originalname.slice(i)
-    //   var nameImg = file.originalname.slice(0, i) + str
-      // console.log("LOG1: ", file);
-      // console.log("LOG2: ", nameImg);
-      cb(null, "nameImg");
-    },
-  });
-  
-  var upload = multer({ storage: storage });
+  destination: function (req, file, cb) {
+    console.log("1111111: ", file);
+    cb(null, "publics/images/");
+  },
+  filename: function (req, file, cb) {
+    console.log("LOG1: ", file);
+    cb(null, file.originalname);
+  },
+});
+
+var upload = multer({ storage: storage });
 
 // ADD
 router.post("/add", upload.single("HinhAnh"), TourController.addTour);

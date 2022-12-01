@@ -43,7 +43,7 @@ const KhachSanSchema = new mongoose.Schema(
     MoTa: {
       type: String,
     },
-    HinhAnhKS: {
+    HinhAnh: {
       type: String,
     },
   },

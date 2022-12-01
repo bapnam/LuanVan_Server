@@ -38,10 +38,10 @@ const TourSchema = new mongoose.Schema(
       // required: true,
       // trim: true,
     },
-    KhachSan: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "KhachSan",
-    },
+    // KhachSan: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "KhachSan",
+    // },
     NguoiHuongDan: {
       // nguoi huong dan
       type: String,
@@ -50,7 +50,7 @@ const TourSchema = new mongoose.Schema(
 
     SoNgay: {
       // So ngay di dự kiến
-      type: String,
+      type: Number,
       // required: true,
     },
     // endDate: {
@@ -69,7 +69,7 @@ const TourSchema = new mongoose.Schema(
     },
     SDT: {
       // sdt nguoi dang tour
-      type: Number,
+      type: String,
       // required: true,
     },
     HinhAnh: {

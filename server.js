@@ -16,6 +16,8 @@ const TourTouter = require("./v1_routes/Tour.Routes");
 const app = express();
 const port = 9000;
 
+app.use('/publics', express.static('publics'))
+
 // dotenv
 dotenv.config();
 
