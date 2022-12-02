@@ -53,10 +53,7 @@ const TourSchema = new mongoose.Schema(
       type: Number,
       // required: true,
     },
-    // endDate: {
-    //   type: String,
-    //   required: true,
-    // },
+    
     Gia: {
       // Giá tour / ngày
       type: Number,

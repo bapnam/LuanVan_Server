@@ -43,14 +43,22 @@ const NguoiDungSchema = new mongoose.Schema(
       required: true,
       minlength: 6,
     },
-    YeuThich: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "",
-      },
-    ],
-    LichSu: {
+    YeuThich: {
       Tour: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Tour",
+        },
+      ],
+      KhachSan: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "KhachSan",
+        },
+      ],
+    },
+    LichSu: {
+      LSTour: [
         {
           Tour: {
             type: mongoose.Schema.Types.ObjectId,
@@ -61,9 +69,9 @@ const NguoiDungSchema = new mongoose.Schema(
           },
         },
       ],
-      KhachSan: [
+      LSKhachSan: [
         {
-          Tour: {
+          KhachSan: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "KhachSan",
           },

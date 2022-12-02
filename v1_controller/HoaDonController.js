@@ -21,7 +21,7 @@ const HoaDonController = {
       newHD.MaHoaDon = maHoaDon;
 
       // Save DB
-      // const HD = await newHD.save();
+      const HD = await newHD.save();
       res.status(200).json(newHD);
     } catch (error) {
       console.log(error);
