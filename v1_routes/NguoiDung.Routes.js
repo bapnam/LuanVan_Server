@@ -6,7 +6,7 @@ const router = require("express").Router();
 router.post("/add", NguoiDungController.addNguoiDung);
 
 // get one 
-router.get("/dangnhap", NguoiDungController.getOne);
+router.post("/dangnhap", NguoiDungController.getOne);
 
 // update
 router.put("/update/:id", NguoiDungController.updateNguoiDung);

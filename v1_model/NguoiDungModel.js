@@ -18,7 +18,7 @@ const NguoiDungSchema = new mongoose.Schema(
     },
     DiaChi: [
       {
-        TenDiaChi: { type: String, default: "Địa Chỉ 1" },
+        TenDiaChi: { type: String, default: "Home" },
         TinhTP: { type: String },
         QuanHuyen: { type: String },
         XaPhuong: { type: String },
@@ -43,47 +43,21 @@ const NguoiDungSchema = new mongoose.Schema(
       required: true,
       minlength: 6,
     },
-    YeuThich: {
-      Tour: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Tour",
-        },
-      ],
-      KhachSan: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "KhachSan",
-        },
-      ],
-    },
-    LichSu: {
-      LSTour: [
-        {
-          Tour: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Tour",
-          },
-          TrangThai: {
-            type: String,
-          },
-        },
-      ],
-      LSKhachSan: [
-        {
-          KhachSan: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "KhachSan",
-          },
-          TrangThai: {
-            type: String,
-          },
-        },
-      ],
-    },
+    YeuThich: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Tour",
+      },
+    ],
+    LichSu: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "HoaDon",
+      },
+    ],
     Quyen: {
       type: String,
-      default: "NguoiMua",
+      default: "MUA",
     },
   },
   { timestamps: true }

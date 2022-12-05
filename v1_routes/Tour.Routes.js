@@ -22,6 +22,9 @@ router.post("/add", upload.single("HinhAnh"), TourController.addTour);
 // get all
 router.get("/getall", TourController.getAll);
 
+// get one
+router.get("/getone/:id", TourController.getOnebyID);
+
 // update
 router.put("/update", TourController.updateTour);
 

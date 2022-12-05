@@ -1,4 +1,5 @@
 const hoadonModel = require("../v1_model/HoaDonModel");
+const NguoiDung = require("../v1_model/NguoiDungModel");
 
 const HoaDonController = {
   // ADD
@@ -15,14 +16,18 @@ const HoaDonController = {
         d +
         "HD" +
         (dsHoaDon.length + 1) +
-        (Math.floor(Math.random() * 1000) + 1);
+        (Math.floor(Math.random() * 10000) + 1);
 
       const newHD = new hoadonModel(req.body);
       newHD.MaHoaDon = maHoaDon;
 
       // Save DB
       const HD = await newHD.save();
-      res.status(200).json(newHD);
+
+      const nd = await NguoiDung.findById(req.body.IDKhachHang);
+      await nd.updateOne({ $push: { LichSu: HD._id } });
+
+      res.status(200).json(HD);
     } catch (error) {
       console.log(error);
       res.status(500).json(error);
@@ -45,6 +50,10 @@ const HoaDonController = {
   // delete
   deleteHoaDon: async (req, res) => {
     try {
+      await NguoiDung.updateMany(
+        { LichSu: req.params.id },
+        { $pull: { LichSu: req.params.id } } // pull vi co array
+      );
       await hoadonModel.findByIdAndDelete(req.params.id);
 
       res.status(200).json("deleted");
@@ -60,7 +69,7 @@ const HoaDonController = {
       const allHD = await hoadonModel
         .find()
         .populate("IDKhachHang", ["HoTen"])
-        .populate({ path: "IDSanPham", populate: "Tour" });
+        .populate({ path: "IDTour", populate: "Tour" });
       res.status(200).json(allHD);
     } catch (error) {
       console.log(error);
@@ -69,12 +78,12 @@ const HoaDonController = {
   },
 
   // get by id
-  getByID: async (req, res) => {
+  getByIDHoaDon: async (req, res) => {
     try {
       const hd = await hoadonModel
         .findById(req.params.id)
         .populate("IDKhachHang", ["HoTen"])
-        .populate({ path: "IDSanPham", populate: "Tour" });
+        .populate("IDTour");
 
       res.status(200).json(hd);
     } catch (error) {
@@ -89,7 +98,21 @@ const HoaDonController = {
       const hd = await hoadonModel
         .find({ MaHoaDon: req.params.mahoadon })
         .populate("IDKhachHang", ["HoTen"])
-        .populate({ path: "IDSanPham", populate: "Tour" });
+        .populate("IDTour");
+
+      res.status(200).json(hd);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  getByIDNguoiDung: async (req, res) => {
+    try {
+      const hd = await hoadonModel
+        .find({ IDKhachHang: req.params.idkhachhang })
+        .populate("IDKhachHang", ["HoTen"])
+        .populate("IDTour");
 
       res.status(200).json(hd);
     } catch (error) {

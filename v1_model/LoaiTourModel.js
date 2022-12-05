@@ -3,8 +3,9 @@ const mongoose = require("mongoose");
 const LoaiTourSchema = new mongoose.Schema(
   {
     TenLoaiTour: {
-        type: String
-    }
+      type: String,
+    },
+    dsTours: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tour" }],
   },
   { timestamps: true }
 );

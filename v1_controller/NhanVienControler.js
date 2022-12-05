@@ -12,6 +12,7 @@ const NhanVienController = {
       const newNV = await new nhanvienModel(req.body);
       newNV.MatKhau = hashed;
       newNV.GioiTinh = req.body.GioiTinh.toUpperCase();
+      newNV.Quyen = req.body.Quyen.toUpperCase();
 
       // Save DB
       const NV = await newNV.save();

@@ -3,6 +3,10 @@ const mongoose = require("mongoose");
 // Create Nhan Vien Schema
 const TourSchema = new mongoose.Schema(
   {
+    ChuTour: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "NguoiDung",
+    },
     TieuDe: {
       // Hiển thị tiêu đề
       type: String,
@@ -53,7 +57,7 @@ const TourSchema = new mongoose.Schema(
       type: Number,
       // required: true,
     },
-    
+
     Gia: {
       // Giá tour / ngày
       type: Number,

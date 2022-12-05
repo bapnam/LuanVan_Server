@@ -7,9 +7,11 @@ router.post("/add", HoaDonController.addHoaDon);
 
 // get all
 router.get("/getall", HoaDonController.getAll);
-// get by id
-router.get("/getbyid/:id", HoaDonController.getByID);
-// get by id
+// get by id hoa don
+router.get("/getbyidhoadon/:id", HoaDonController.getByIDHoaDon);
+// get by id nguoidung
+router.get("/getbyidkhachhang/:idkhachhang", HoaDonController.getByIDNguoiDung);
+// get by ma hoa don
 router.get("/getbymahoadon/:mahoadon", HoaDonController.getByMaHoaDon);
 
 // update
