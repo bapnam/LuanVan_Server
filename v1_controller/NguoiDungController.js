@@ -102,6 +102,18 @@ const NguoiDungController = {
       res.status(500).json(error);
     }
   },
+
+  // get one
+  getUser: async (req, res) => {
+    try {
+      const nd = await nguoidungModel.findById(req.params.id);
+
+      res.status(200).json(nd);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
 };
 
 module.exports = NguoiDungController;

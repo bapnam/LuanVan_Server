@@ -5,11 +5,13 @@ const router = require("express").Router();
 // ADD
 router.post("/add", NguoiDungController.addNguoiDung);
 
-// get one 
+// get one
 router.post("/dangnhap", NguoiDungController.getOne);
+
+// get user
+router.get("/getuser/:id", NguoiDungController.getUser);
 
 // update
 router.put("/update/:id", NguoiDungController.updateNguoiDung);
-
 
 module.exports = router;
