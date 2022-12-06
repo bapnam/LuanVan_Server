@@ -5,4 +5,7 @@ const router = require("express").Router();
 // ADD
 router.post("/add", NhanVienController.addNhanVien);
 
+// dang nhap
+router.post("/dangnhap", NhanVienController.dangNhap);
+
 module.exports = router;

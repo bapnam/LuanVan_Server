@@ -25,6 +25,9 @@ router.get("/getall", TourController.getAll);
 // get one
 router.get("/getone/:id", TourController.getOnebyID);
 
+// get list
+router.post("/getbylist", TourController.getByList);
+
 // update
 router.put("/update", TourController.updateTour);
 

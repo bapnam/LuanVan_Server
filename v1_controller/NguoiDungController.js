@@ -1,4 +1,6 @@
 const nguoidungModel = require("../v1_model/NguoiDungModel");
+const HoaDonModel = require("../v1_model/HoaDonModel");
+
 const bcrypt = require("bcrypt");
 
 const NguoiDungController = {
@@ -88,10 +90,17 @@ const NguoiDungController = {
     try {
       const nd = await nguoidungModel.findById(req.params.id);
 
-      if (req.body.MatKhau != "") {
+      if (req.body.MatKhau) {
         const salt = await bcrypt.genSalt(10);
         const hashed = await bcrypt.hash(req.body.MatKhau, salt);
         await nd.updateOne({ $set: { MatKhau: hashed } });
+      } else if (req.body.YeuThich) {
+        if (!req.body.like) {
+          await nd.updateOne({ $pull: { YeuThich: req.body.YeuThich } });
+        } else {
+          console.log(req.body.YeuThich);
+          await nd.updateOne({ $push: { YeuThich: req.body.YeuThich } });
+        }
       } else {
         await nd.updateOne(req.body);
       }
@@ -109,6 +118,103 @@ const NguoiDungController = {
       const nd = await nguoidungModel.findById(req.params.id);
 
       res.status(200).json(nd);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  // get all
+  getAll: async (req, res) => {
+    try {
+      const nd = await nguoidungModel.find();
+
+      res.status(200).json(nd);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  // get all Mua
+  getAllMua: async (req, res) => {
+    try {
+      const nd = await nguoidungModel.find({ Quyen: "MUA" });
+
+      res.status(200).json(nd);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  // get all Ban
+  getAllBan: async (req, res) => {
+    try {
+      const nd = await nguoidungModel.find({ Quyen: "BAN" });
+
+      res.status(200).json(nd);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  // get yeu thich
+  getLike: async (req, res) => {
+    try {
+      const nd = await nguoidungModel.findById(req.params.id);
+
+      res.status(200).json(nd.YeuThich);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  // Thong ke
+  //
+  TongDoanhThu: async (req, res) => {
+    try {
+      let sum = 0;
+      const dsHD = await HoaDonModel.find({ IDKhachHang: req.params.id });
+
+      if (dsHD.length > 0) {
+        for (let i = 0; i < dsHD.length; i++) {
+          sum += dsHD[i].TongTien;
+        }
+      }
+
+      console.log("SUML: ", sum);
+      res.status(200).json(sum);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  // tong doanh thu theo ngay
+  TongDoanhThuTheoNgay: async (req, res) => {
+    try {
+      // 05-12-2022
+      const arrDate = req.body.Ngay.split("-"); // dd,MM,yyyy
+      const gteDate = new Date(arrDate[2], arrDate[1] - 1, arrDate[0]);
+      const ltDate = new Date(arrDate[2], arrDate[1] - 1, arrDate[0] + 1);
+
+      const dsHD = await HoaDonModel.find({
+        IDKhachHang: req.body.idkh,
+        createdAt: { $gte: gteDate, $lt: ltDate },
+      });
+
+      let sum = 0;
+      if (dsHD.length > 0) {
+        for (let i = 0; i < dsHD.length; i++) {
+          sum += dsHD[i].TongTien;
+        }
+      }
+
+      console.log("SUML: ", sum);
+      res.status(200).json(sum);
     } catch (error) {
       console.log(error);
       res.status(500).json(error);

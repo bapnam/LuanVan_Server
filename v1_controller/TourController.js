@@ -139,13 +139,35 @@ const TourController = {
   getOnebyID: async (req, res) => {
     try {
       const one = await TourModel.findById(req.params.id);
-      one.LichTrinh = "lich trinh"
+      one.LichTrinh = "lich trinh";
       res.status(200).json(one);
     } catch (error) {
       console.log(error);
       res.status(500).json(error);
     }
   },
+
+  // get by list id
+  getByList: async (req, res) => {
+    try {
+      const list = [];
+      for (let i = 0; i < req.body.length; i++) {
+        let one = await TourModel.findById(req.body[i]);
+        await list.push(one);
+      }
+
+      // console.log(list);
+
+      res.status(200).json(list);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  //// Thong Ke
+
+  
 };
 
 module.exports = TourController;

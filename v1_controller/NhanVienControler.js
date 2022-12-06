@@ -31,6 +31,42 @@ const NhanVienController = {
       res.status(500).json(error);
     }
   },
+
+  // Dang nhap
+  dangNhap: async (req, res) => {
+    try {
+      const nv = await nhanvienModel.findOne({ Email: req.body.Email });
+
+      const data = {
+        stateLogin: "",
+        id: "id",
+        HoTen: "",
+        Quyen: "",
+      };
+
+      if (!nv) {
+        data.stateLogin = "NoUser";
+        return res.status(200).json(data); //Khong tim thay nguoi dung!!!
+      } else {
+        const pwd = await bcrypt.compare(req.body.MatKhau, nv.MatKhau);
+        if (!pwd) {
+          data.stateLogin = "NoPassword";
+          return res.status(200).json(data); //Sai mat khau!!!
+        }
+        if (nv && pwd) {
+          data.stateLogin = "Yes";
+          data.id = nv._id;
+          data.HoTen = nv.HoTen;
+          data.Quyen = nv.Quyen;
+
+          return res.status(200).json(data); // Cho phep dang nhap
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
 };
 
 module.exports = NhanVienController;

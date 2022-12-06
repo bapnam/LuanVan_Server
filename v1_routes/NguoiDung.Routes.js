@@ -11,7 +11,29 @@ router.post("/dangnhap", NguoiDungController.getOne);
 // get user
 router.get("/getuser/:id", NguoiDungController.getUser);
 
+// get all
+router.get("/getall", NguoiDungController.getAll);
+
+// get all Mua
+router.get("/getallmua", NguoiDungController.getAllMua);
+
+// get all Ban
+router.get("/getallban", NguoiDungController.getAllBan);
+
+// get yeu thich by id
+router.get("/getlike/:id", NguoiDungController.getLike);
+
+
 // update
 router.put("/update/:id", NguoiDungController.updateNguoiDung);
+
+/// Thong ke
+//
+router.get("/tongdoanhthu/:id", NguoiDungController.TongDoanhThu);
+
+router.post("/tongdoanhthutheongay", NguoiDungController.TongDoanhThuTheoNgay);
+
+
+
 
 module.exports = router;
