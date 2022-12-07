@@ -89,11 +89,16 @@ const NguoiDungController = {
   updateNguoiDung: async (req, res) => {
     try {
       const nd = await nguoidungModel.findById(req.params.id);
-
-      if (req.body.MatKhau) {
+      if (req.body.CurrentPassword) {
         const salt = await bcrypt.genSalt(10);
-        const hashed = await bcrypt.hash(req.body.MatKhau, salt);
-        await nd.updateOne({ $set: { MatKhau: hashed } });
+        const pwd = await bcrypt.compare(req.body.CurrentPassword, nd.MatKhau);
+
+        if (!pwd) {
+          return res.status(200).json("NoPassword");
+        } else {
+          const hashed = await bcrypt.hash(req.body.NewPassword, salt);
+          await nd.updateOne({ $set: { MatKhau: hashed } });
+        }
       } else if (req.body.YeuThich) {
         if (!req.body.like) {
           await nd.updateOne({ $pull: { YeuThich: req.body.YeuThich } });
