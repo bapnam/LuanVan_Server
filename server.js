@@ -4,12 +4,12 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 
-const HoaDonTouter = require("./v1_routes/HoaDon.Routes");
-const KhachSanTouter = require("./v1_routes/KhachSan.Routes");
-const LoaiTourTouter = require("./v1_routes/LoaiTour.Routes");
-const NguoiDungTouter = require("./v1_routes/NguoiDung.Routes");
+const HoaDonRouter = require("./v1_routes/HoaDon.Routes");
+const KhachSanRouter = require("./v1_routes/KhachSan.Routes");
+const LoaiTourRouter = require("./v1_routes/LoaiTour.Routes");
+const NguoiDungRouter = require("./v1_routes/NguoiDung.Routes");
 const NhanVienRouter = require("./v1_routes/NhanVien.Routes");
-const TourTouter = require("./v1_routes/Tour.Routes");
+const TourRouter = require("./v1_routes/Tour.Routes");
 
 //LOG---
 //
@@ -41,12 +41,12 @@ mongoose.connect(process.env.MONGODB_URL, { dbName: "LuanVan" }, () => {
 //LOG--- ROUTES
 //
 
-app.use("/v1/hoadon", HoaDonTouter);
-app.use("/v1/khachsan", KhachSanTouter)
-app.use("/v1/loaitour", LoaiTourTouter);
-app.use("/v1/nguoidung", NguoiDungTouter);
+app.use("/v1/hoadon", HoaDonRouter);
+app.use("/v1/khachsan", KhachSanRouter)
+app.use("/v1/loaitour", LoaiTourRouter);
+app.use("/v1/nguoidung", NguoiDungRouter);
 app.use("/v1/nhanvien", NhanVienRouter);
-app.use("/v1/tour", TourTouter);
+app.use("/v1/tour", TourRouter);
 
 //LOG---
 //

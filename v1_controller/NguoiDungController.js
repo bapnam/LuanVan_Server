@@ -44,7 +44,9 @@ const NguoiDungController = {
             ChiTiet: "",
           },
         ],
-        Email: "ykgk",
+        GioiTinh: "",
+        Email: "",
+        CMND: "",
         YeuThich: [""],
         LichSu: [
           {
@@ -71,6 +73,8 @@ const NguoiDungController = {
           data.NgaySinh = nd.NgaySinh;
           data.SDT = nd.SDT;
           data.DiaChi = nd.DiaChi;
+          data.GioiTinh = nd.GioiTinh;
+          data.CMND = nd.CMND;
           data.Email = nd.Email;
           data.YeuThich = nd.YeuThich;
           data.LichSu = nd.LichSu;
@@ -121,8 +125,47 @@ const NguoiDungController = {
   getUser: async (req, res) => {
     try {
       const nd = await nguoidungModel.findById(req.params.id);
+      const data = {
+        stateLogin: "",
+        id: "id",
+        HoTen: "",
+        NgaySinh: "",
+        SDT: "",
+        DiaChi: [
+          {
+            TinhTP: "",
+            QuanHuyen: "",
+            XaPhuong: "",
+            ChiTiet: "",
+          },
+        ],
+        GioiTinh: "",
+        Email: "",
+        CMND: "",
+        YeuThich: [""],
+        LichSu: [
+          {
+            Tour: "",
+            TrangThai: "x",
+          },
+        ],
+        Quyen: "",
+      };
 
-      res.status(200).json(nd);
+      data.stateLogin = "Yes";
+      data.id = nd._id;
+      data.HoTen = nd.HoTen;
+      data.NgaySinh = nd.NgaySinh;
+      data.SDT = nd.SDT;
+      data.DiaChi = nd.DiaChi;
+      data.GioiTinh = nd.GioiTinh;
+      data.CMND = nd.CMND;
+      data.Email = nd.Email;
+      data.YeuThich = nd.YeuThich;
+      data.LichSu = nd.LichSu;
+      data.Quyen = nd.Quyen;
+
+      return res.status(200).json(data);
     } catch (error) {
       console.log(error);
       res.status(500).json(error);
