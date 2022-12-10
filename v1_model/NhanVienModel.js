@@ -14,7 +14,7 @@ const NhanVienSchema = new mongoose.Schema(
     SDT: {
       type: String,
       required: true,
-      unique: true,
+      // unique: true,
     },
     DiaChi: [
       {
@@ -27,12 +27,12 @@ const NhanVienSchema = new mongoose.Schema(
     ],
     GioiTinh: {
       type: String,
-      required: true,
+      // required: true,
     },
     CMND: {
       type: String,
       required: true,
-      unique: true,
+      // unique: true,
       pattern: "[0-9]",
     },
     Email: {
@@ -42,11 +42,11 @@ const NhanVienSchema = new mongoose.Schema(
     MatKhau: {
       type: String,
       required: true,
-      minlength: 6,
+      // minlength: 6,
     },
     Quyen: {
       type: String,
-      required: true,
+      // required: true,
       default: "NhanVien",
     },
   },

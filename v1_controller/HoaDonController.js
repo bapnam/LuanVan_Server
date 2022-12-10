@@ -69,7 +69,7 @@ const HoaDonController = {
       const allHD = await hoadonModel
         .find()
         .populate("IDKhachHang", ["HoTen"])
-        .populate({ path: "IDTour", populate: "Tour" });
+        .populate("IDTour");
       res.status(200).json(allHD);
     } catch (error) {
       console.log(error);
@@ -107,6 +107,7 @@ const HoaDonController = {
     }
   },
 
+  // get
   getByIDNguoiDung: async (req, res) => {
     try {
       const hd = await hoadonModel
@@ -115,6 +116,28 @@ const HoaDonController = {
         .populate("IDTour");
 
       res.status(200).json(hd);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  // get
+  getByIdChuTour: async (req, res) => {
+    try {
+      const hd = await hoadonModel
+        .find()
+        .populate("IDKhachHang", ["HoTen"])
+        .populate("IDTour");
+
+      const list = [];
+      for (let i = 0; i < hd.length; i++) {
+        if (req.params.id == hd[i].IDTour.ChuTour) {
+          await list.push(hd[i]);
+        }
+      }
+
+      res.status(200).json(list);
     } catch (error) {
       console.log(error);
       res.status(500).json(error);

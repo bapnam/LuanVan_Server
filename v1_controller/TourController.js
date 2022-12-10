@@ -51,9 +51,9 @@ const TourController = {
   // update
   updateTour: async (req, res) => {
     try {
-      const tour = await TourModel.findById(req.body.id);
+      const tour = await TourModel.findById(req.body._id);
 
-      await tour.updateOne({ $set: req.body.newValue });
+      await tour.updateOne({ $set: req.body });
       res.status(200).json("updated");
 
       // switch (status) {
@@ -139,7 +139,6 @@ const TourController = {
   getOnebyID: async (req, res) => {
     try {
       const one = await TourModel.findById(req.params.id);
-      one.LichTrinh = "lich trinh";
       res.status(200).json(one);
     } catch (error) {
       console.log(error);
@@ -165,9 +164,16 @@ const TourController = {
     }
   },
 
-  //// Thong Ke
-
-  
+  //// get by id chu tour
+  getByIDChuTour: async (req, res) => {
+    try {
+      const t = await TourModel.find({ ChuTour: req.params.id });
+      res.status(200).json(t);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
 };
 
 module.exports = TourController;

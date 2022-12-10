@@ -13,6 +13,8 @@ router.get("/getbyidhoadon/:id", HoaDonController.getByIDHoaDon);
 router.get("/getbyidkhachhang/:idkhachhang", HoaDonController.getByIDNguoiDung);
 // get by ma hoa don
 router.get("/getbymahoadon/:mahoadon", HoaDonController.getByMaHoaDon);
+// get
+router.get("/getallbyidchutour/:id", HoaDonController.getByIdChuTour)
 
 // update
 router.put("/update/:id", HoaDonController.updateHoaDon);

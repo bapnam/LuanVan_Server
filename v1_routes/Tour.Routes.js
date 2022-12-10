@@ -28,6 +28,9 @@ router.get("/getone/:id", TourController.getOnebyID);
 // get list
 router.post("/getbylist", TourController.getByList);
 
+// get by id chu tour
+router.get("/getbyidchutour/:id", TourController.getByIDChuTour);
+
 // update
 router.put("/update", TourController.updateTour);
 

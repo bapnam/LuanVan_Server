@@ -5,18 +5,23 @@ const NhanVienController = {
   // ADD
   addNhanVien: async (req, res) => {
     try {
-      const salt = await bcrypt.genSalt(10);
-      const hashed = await bcrypt.hash(req.body.MatKhau, salt);
+      // const salt = await bcrypt.genSalt(10);
+      if (req.body.MatKhau != "") {
+        const newNV = await new nhanvienModel(req.body);
+        console.log("HHHHHH", req.body);
 
-      // Create NV
-      const newNV = await new nhanvienModel(req.body);
-      newNV.MatKhau = hashed;
-      newNV.GioiTinh = req.body.GioiTinh.toUpperCase();
-      newNV.Quyen = req.body.Quyen.toUpperCase();
+        // const hashed = await bcrypt.hash(req.body.MatKhau, salt);
+        // Create NV
+        // newNV.MatKhau = hashed;
+        // newNV.GioiTinh = req.body.GioiTinh.toUpperCase();
+        // newNV.Quyen = req.body.Quyen.toUpperCase();
 
-      // Save DB
-      const NV = await newNV.save();
-      res.status(200).json(NV);
+        // Save DB
+        // const NV = await newNV.save();
+        return res.status(200).json(newNV);
+      }
+
+      res.status(200).json("add Sai");
     } catch (error) {
       console.log(error);
       res.status(500).json(error);
@@ -62,6 +67,18 @@ const NhanVienController = {
           return res.status(200).json(data); // Cho phep dang nhap
         }
       }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  // get all
+  getall: async (req, res) => {
+    try {
+      const nv = await nhanvienModel.find();
+
+      res.status(200).json(nv);
     } catch (error) {
       console.log(error);
       res.status(500).json(error);

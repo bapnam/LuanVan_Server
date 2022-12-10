@@ -10,6 +10,8 @@ const LoaiTourRouter = require("./v1_routes/LoaiTour.Routes");
 const NguoiDungRouter = require("./v1_routes/NguoiDung.Routes");
 const NhanVienRouter = require("./v1_routes/NhanVien.Routes");
 const TourRouter = require("./v1_routes/Tour.Routes");
+const ThongKeRouter = require("./v1_routes/ThongKe.Routes");
+
 
 //LOG---
 //
@@ -47,6 +49,8 @@ app.use("/v1/loaitour", LoaiTourRouter);
 app.use("/v1/nguoidung", NguoiDungRouter);
 app.use("/v1/nhanvien", NhanVienRouter);
 app.use("/v1/tour", TourRouter);
+app.use("/v1/thongke", ThongKeRouter);
+
 
 //LOG---
 //

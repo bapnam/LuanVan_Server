@@ -27,11 +27,7 @@ router.get("/getlike/:id", NguoiDungController.getLike);
 // update
 router.put("/update/:id", NguoiDungController.updateNguoiDung);
 
-/// Thong ke
-//
-router.get("/tongdoanhthu/:id", NguoiDungController.TongDoanhThu);
 
-router.post("/tongdoanhthutheongay", NguoiDungController.TongDoanhThuTheoNgay);
 
 
 
