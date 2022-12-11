@@ -69,7 +69,8 @@ const HoaDonController = {
       const allHD = await hoadonModel
         .find()
         .populate("IDKhachHang", ["HoTen"])
-        .populate("IDTour");
+        .populate("IDTour")
+        .sort({ createdAt: -1 });
       res.status(200).json(allHD);
     } catch (error) {
       console.log(error);
@@ -83,7 +84,8 @@ const HoaDonController = {
       const hd = await hoadonModel
         .findById(req.params.id)
         .populate("IDKhachHang", ["HoTen"])
-        .populate("IDTour");
+        .populate("IDTour")
+        .sort({ createdAt: -1 });
 
       res.status(200).json(hd);
     } catch (error) {
@@ -98,7 +100,8 @@ const HoaDonController = {
       const hd = await hoadonModel
         .find({ MaHoaDon: req.params.mahoadon })
         .populate("IDKhachHang", ["HoTen"])
-        .populate("IDTour");
+        .populate("IDTour")
+        .sort({ createdAt: -1 });
 
       res.status(200).json(hd);
     } catch (error) {
@@ -113,7 +116,8 @@ const HoaDonController = {
       const hd = await hoadonModel
         .find({ IDKhachHang: req.params.idkhachhang })
         .populate("IDKhachHang", ["HoTen"])
-        .populate("IDTour");
+        .populate("IDTour")
+        .sort({ createdAt: -1 });
 
       res.status(200).json(hd);
     } catch (error) {
@@ -128,7 +132,8 @@ const HoaDonController = {
       const hd = await hoadonModel
         .find()
         .populate("IDKhachHang", ["HoTen"])
-        .populate("IDTour");
+        .populate("IDTour")
+        .sort({ createdAt: -1 });
 
       const list = [];
       for (let i = 0; i < hd.length; i++) {

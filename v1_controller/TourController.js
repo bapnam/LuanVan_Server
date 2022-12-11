@@ -10,22 +10,14 @@ const TourController = {
       if (req.file) {
         var nameImg = req.file.originalname;
         newTour.HinhAnh = nameImg;
-
-        // res.status(200).json(!req.file);
       }
-      // else {
-      //   res.status(200).json(false);
-      // }
-
       // Save DB
       const tour = await newTour.save();
-
       // add to loai tour
       if (req.body.LoaiTour) {
         const lt = LoaiTour.findById(req.body.LoaiTour);
         await lt.updateOne({ $push: { dsTours: tour._id } });
       }
-
       res.status(200).json(tour);
     } catch (error) {
       console.log(error);
@@ -52,53 +44,8 @@ const TourController = {
   updateTour: async (req, res) => {
     try {
       const tour = await TourModel.findById(req.body._id);
-
       await tour.updateOne({ $set: req.body });
-      res.status(200).json("updated");
-
-      // switch (status) {
-      //   // update gia
-      //   case "Gia": {
-      //     await tour.updateOne({ $set: { Gia: req.body.newValue } });
-      //     res.status(200).json("updated");
-      //     break;
-      //   }
-      //   // update nguoi huong dan
-      //   case "NguoiHuongDan": {
-      //     await tour.updateOne({ $set: { NguoiHuongDan: req.body.newValue } });
-      //     res.status(200).json("updated");
-      //     break;
-      //   }
-      //   // update Loai tour
-      //   case "LoaiTour": {
-      //     await tour.updateOne({ $set: { LoaiTour: req.body.newValue } });
-      //     res.status(200).json("updated");
-      //     break;
-      //   }
-      //   // update Lich Trinh
-      //   case "LichTrinh": {
-      //     await tour.updateOne({ $set: { LichTrinh: req.body.newValue } });
-      //     res.status(200).json("updated");
-      //     break;
-      //   }
-      //   // update So ngay
-      //   case "SoNgay": {
-      // await tour.updateOne({ $set: { SoNgay: req.body.newValue } });
-      // res.status(200).json("updated");
-      //   break;
-      // }
-
-      // update All
-      // case "All": {
-
-      // break;
-      // }
-      // default: {
-      //   // mac dinh khi k co status
-      //   res.status(200).json("noUpdate");
-      //   break;
-      // }
-      // }
+      res.status(200).json("updated");      
     } catch (error) {
       console.log(error);
       res.status(500).json(error);
@@ -128,7 +75,9 @@ const TourController = {
   // get all
   getAll: async (req, res) => {
     try {
-      const all = await TourModel.find().populate("LoaiTour", ["TenLoaiTour"]);
+      const all = await TourModel.find()
+        .populate("LoaiTour", ["TenLoaiTour"])
+        .sort({ createdAt: -1 });
       res.status(200).json(all);
     } catch (error) {
       console.log(error);
@@ -154,9 +103,6 @@ const TourController = {
         let one = await TourModel.findById(req.body[i]);
         await list.push(one);
       }
-
-      // console.log(list);
-
       res.status(200).json(list);
     } catch (error) {
       console.log(error);
@@ -167,7 +113,7 @@ const TourController = {
   //// get by id chu tour
   getByIDChuTour: async (req, res) => {
     try {
-      const t = await TourModel.find({ ChuTour: req.params.id });
+      const t = await TourModel.find({ ChuTour: req.params.id }).sort({createdAt: -1});
       res.status(200).json(t);
     } catch (error) {
       console.log(error);

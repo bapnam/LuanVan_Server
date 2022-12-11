@@ -12,6 +12,6 @@ router.post(
   ThongKeController.TongDoanhThuTheoNgay
 );
 
-router.post("/thongkeall/:id", ThongKeController.thongKeAll);
+router.post("/thongkeallchutour/:id", ThongKeController.thongKeAllChuTour);
 
 module.exports = router;

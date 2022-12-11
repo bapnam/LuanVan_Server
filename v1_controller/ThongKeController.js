@@ -1,5 +1,6 @@
 const nguoidungModel = require("../v1_model/NguoiDungModel");
 const HoaDonModel = require("../v1_model/HoaDonModel");
+const TourModel = require("../v1_model/TourModel");
 
 const bcrypt = require("bcrypt");
 
@@ -67,28 +68,48 @@ const ThongKeController = {
   },
 
   // thong ke all
-  thongKeAll: async (req, res) => {
+  thongKeAllChuTour: async (req, res) => {
+    //----------
+    // Yeu cau ngay hom nay
     try {
       // 05-12-2022
       const arrDate = req.body.Ngay.split("-"); // dd,MM,yyyy
       const gteDateBe7 = new Date(arrDate[2], arrDate[1] - 1, arrDate[0] - 7);
-console.log("D: ", gteDateBe7);
 
       const gteDate = new Date(arrDate[2], arrDate[1] - 1, arrDate[0]);
       const ltDate = new Date(arrDate[2], arrDate[1] - 1, arrDate[0] + 1);
 
+      // list bai dang theo chu tour
+      const listBaiDang = await TourModel.find({ ChuTour: req.params.id });
+
+      //Hóa đơn ngày hôm nay
       const hd = await HoaDonModel.find({
         createdAt: { $gte: gteDate, $lt: ltDate },
       })
         .populate("IDKhachHang", ["HoTen"])
         .populate("IDTour");
 
+      // Hóa đơn trong 7 ngày
       const hdIn7d = await HoaDonModel.find({
         createdAt: { $gte: gteDateBe7, $lt: ltDate },
       })
         .populate("IDKhachHang", ["HoTen"])
         .populate("IDTour");
 
+      // danh sach tat ca hoa don
+      const allHD = await HoaDonModel.find()
+        .populate("IDKhachHang", ["HoTen"])
+        .populate("IDTour");
+
+      //Tong doanh thu
+      let allSum = 0;
+      for (let i = 0; i < allHD.length; i++) {
+        if (req.params.id == allHD[i].IDTour.ChuTour) {
+          allSum += allHD[i].TongTien;
+        }
+      }
+
+      // tổng trên ngày
       let sum = 0;
       for (let i = 0; i < hd.length; i++) {
         if (req.params.id == hd[i].IDTour.ChuTour) {
@@ -96,6 +117,7 @@ console.log("D: ", gteDateBe7);
         }
       }
 
+      // tổng của 7 ngày qua
       let sum7 = 0;
       for (let i = 0; i < hdIn7d.length; i++) {
         if (req.params.id == hdIn7d[i].IDTour.ChuTour) {
@@ -103,10 +125,17 @@ console.log("D: ", gteDateBe7);
         }
       }
 
-      const tk = [sum, sum7];
+      const tk = [sum7, sum];
 
       console.log("SUML: ", tk);
-      res.status(200).json(tk);
+
+      const ketqua = {
+        TongDoanhThu: allSum,
+        TongHomNay: sum,
+        TongBayNgay: sum7,
+        SoLuongBaiDang: listBaiDang.length,
+      };
+      res.status(200).json(ketqua);
     } catch (error) {
       console.log(error);
       res.status(500).json(error);
