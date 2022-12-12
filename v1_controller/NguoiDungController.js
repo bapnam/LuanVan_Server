@@ -11,9 +11,13 @@ const NguoiDungController = {
       const hashed = await bcrypt.hash(req.body.MatKhau, salt);
 
       // Create NV
+      console.log(req.body);
       const newND = await new nguoidungModel(req.body);
       newND.MatKhau = hashed;
-      newND.GioiTinh = req.body.GioiTinh.toUpperCase();
+      if (req.body.GioiTinh == "") {
+        newND.GioiTinh = req.body.GioiTinh.toUpperCase();
+      }
+
       newND.Quyen = req.body.Quyen.toUpperCase();
 
       // Save DB
