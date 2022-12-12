@@ -125,10 +125,28 @@ const ThongKeController = {
         }
       }
 
-      const tk = [sum7, sum];
+      
+////////
+    //   const nguoiDung = await nguoidungModel.find();
+    //   var allList = [];
+    //   var tour;
+    //   var hoaDon;
 
-      console.log("SUML: ", tk);
+    //  const tour = await TourModel.find({ ChuTour: req.params.id });
+    //   for (var i = 0; i < nguoiDung.length; i++) {
+    //     for (var j = 0; j < tour.length; j++) {
+    //       hoaDon = await HoaDonModel.find({ IDTour: tour[j].id });
+    //       allList.push({
+    //         // ChuTour: nguoiDung[i].HoTen,
+    //         Tour: tour[j].DiaDiem,
+    //         amount: hoaDon ? hoaDon.length : 0,
+    //       });
+    //     }
+    //   }
 
+    //   const t = allList.sort((a, b) => b.amount - a.amount);
+      // res.status(200).json(t);
+/////////////
       const ketqua = {
         TongDoanhThu: allSum,
         TongHomNay: sum,
