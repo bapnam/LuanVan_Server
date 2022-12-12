@@ -27,6 +27,8 @@ router.get("/getlike/:id", NguoiDungController.getLike);
 // update
 router.put("/update/:id", NguoiDungController.updateNguoiDung);
 
+// delete
+router.delete("/delete/:id", NguoiDungController.deleteNguoiDung);
 
 
 

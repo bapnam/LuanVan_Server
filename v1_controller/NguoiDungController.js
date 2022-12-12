@@ -29,6 +29,17 @@ const NguoiDungController = {
     }
   },
 
+  // delete
+  deleteNguoiDung: async (req, res) => {
+    try {
+      await nguoidungModel.findByIdAndDelete(req.params.id);
+      res.status(200).json("deleted");
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
   // Get one or dang nhap
   getOne: async (req, res) => {
     try {

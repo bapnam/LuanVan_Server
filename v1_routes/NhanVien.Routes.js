@@ -11,4 +11,11 @@ router.post("/dangnhap", NhanVienController.dangNhap);
 // get all
 router.get("/getall", NhanVienController.getall)
 
+// get one
+router.get("/getone/:id", NhanVienController.getOne)
+
+// delete
+router.delete("/delete/:id", NhanVienController.deleteNhanVien)
+
+
 module.exports = router;

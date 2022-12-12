@@ -8,17 +8,18 @@ const NhanVienController = {
       // const salt = await bcrypt.genSalt(10);
       if (req.body.MatKhau != "") {
         const newNV = await new nhanvienModel(req.body);
-        console.log("HHHHHH", req.body);
+        // console.log("HHHHHH", req.body);
+        const salt = await bcrypt.genSalt(10);
+        const hashed = await bcrypt.hash(req.body.MatKhau, salt);
 
-        // const hashed = await bcrypt.hash(req.body.MatKhau, salt);
         // Create NV
-        // newNV.MatKhau = hashed;
-        // newNV.GioiTinh = req.body.GioiTinh.toUpperCase();
-        // newNV.Quyen = req.body.Quyen.toUpperCase();
+        newNV.MatKhau = hashed;
+        newNV.GioiTinh = req.body.GioiTinh.toUpperCase();
+        newNV.Quyen = req.body.Quyen.toUpperCase();
 
         // Save DB
-        // const NV = await newNV.save();
-        return res.status(200).json(newNV);
+        const NV = await newNV.save();
+        return res.status(200).json(NV);
       }
 
       res.status(200).json("add Sai");
@@ -31,6 +32,8 @@ const NhanVienController = {
   // delete
   deleteNhanVien: async (req, res) => {
     try {
+      await nhanvienModel.findByIdAndDelete(req.params.id);
+      res.status(200).json("deleted");
     } catch (error) {
       console.log(error);
       res.status(500).json(error);
@@ -50,16 +53,16 @@ const NhanVienController = {
       };
 
       if (!nv) {
-        data.stateLogin = "NoUser";
+        data.stateLogin = "NoUserNV";
         return res.status(200).json(data); //Khong tim thay nguoi dung!!!
       } else {
         const pwd = await bcrypt.compare(req.body.MatKhau, nv.MatKhau);
         if (!pwd) {
-          data.stateLogin = "NoPassword";
+          data.stateLogin = "NoPasswordNV";
           return res.status(200).json(data); //Sai mat khau!!!
         }
         if (nv && pwd) {
-          data.stateLogin = "Yes";
+          data.stateLogin = "YesNV";
           data.id = nv._id;
           data.HoTen = nv.HoTen;
           data.Quyen = nv.Quyen;
@@ -77,6 +80,17 @@ const NhanVienController = {
   getall: async (req, res) => {
     try {
       const nv = await nhanvienModel.find();
+
+      res.status(200).json(nv);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  getOne: async (req, res) => {
+    try {
+      const nv = await nhanvienModel.findById(req.params.id);
 
       res.status(200).json(nv);
     } catch (error) {

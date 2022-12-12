@@ -15,8 +15,9 @@ const HoaDonController = {
       const maHoaDon =
         d +
         "HD" +
-        (dsHoaDon.length + 1) +
-        (Math.floor(Math.random() * 10000) + 1);
+        (Math.floor(Math.random() * 10000) + 1) +
+        "L" +
+        (dsHoaDon.length + 1);
 
       const newHD = new hoadonModel(req.body);
       newHD.MaHoaDon = maHoaDon;
