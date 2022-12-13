@@ -34,8 +34,8 @@ const NguoiDungSchema = new mongoose.Schema(
     },
     CMND: {
       type: String,
-      unique: true,
-      pattern: "[0-9]",
+      // unique: true,
+      // pattern: "[0-9]",
     },
     MatKhau: {
       type: String,

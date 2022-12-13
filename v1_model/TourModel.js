@@ -31,11 +31,29 @@ const TourSchema = new mongoose.Schema(
       // lich trinh
       type: String,
     },
-    NguoiHuongDan: {
-      // nguoi huong dan
-      type: String,
+
+    //
+    // NguoiHuongDan: {
+    //   // nguoi huong dan
+    //   type: String,
+    // },
+
+    // Số lượng khách tối đa
+    SoluongKHmax: {
+      type: Number,
     },
 
+    // // Số lượng tối thiểu
+    // SoLuongKHmin: {
+    //   type: Number,
+    // },
+    // //
+    // SoLuongTour: [
+    //   {
+    //     type: Number,
+    //   },
+    // ],
+    ///
     SoNgay: {
       // So ngay di dự kiến
       type: Number,

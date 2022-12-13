@@ -11,14 +11,15 @@ const NguoiDungRouter = require("./v1_routes/NguoiDung.Routes");
 const NhanVienRouter = require("./v1_routes/NhanVien.Routes");
 const TourRouter = require("./v1_routes/Tour.Routes");
 const ThongKeRouter = require("./v1_routes/ThongKe.Routes");
-
+const YeuCauTour = require("./v1_routes/YeuCauTour.Routes");
+const SetupTour = require("./v1_routes/SetupTour.Routes");
 
 //LOG---
 //
 const app = express();
 const port = 9000;
 
-app.use('/publics', express.static('publics'))
+app.use("/publics", express.static("publics"));
 
 // dotenv
 dotenv.config();
@@ -44,12 +45,14 @@ mongoose.connect(process.env.MONGODB_URL, { dbName: "LuanVan" }, () => {
 //
 
 app.use("/v1/hoadon", HoaDonRouter);
-app.use("/v1/khachsan", KhachSanRouter)
+app.use("/v1/khachsan", KhachSanRouter);
 app.use("/v1/loaitour", LoaiTourRouter);
 app.use("/v1/nguoidung", NguoiDungRouter);
 app.use("/v1/nhanvien", NhanVienRouter);
 app.use("/v1/tour", TourRouter);
 app.use("/v1/thongke", ThongKeRouter);
+app.use("/v1/yeucautour", YeuCauTour);
+app.use("/v1/setuptour", SetupTour);
 
 
 //LOG---
