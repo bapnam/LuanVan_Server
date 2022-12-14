@@ -43,6 +43,10 @@ const TourSchema = new mongoose.Schema(
       type: Number,
     },
 
+    SoLuongCon: {
+      type: String
+    },
+
     // // Số lượng tối thiểu
     // SoLuongKHmin: {
     //   type: Number,
