@@ -14,6 +14,9 @@ const ThongKeRouter = require("./v1_routes/ThongKe.Routes");
 const YeuCauTour = require("./v1_routes/YeuCauTour.Routes");
 const SetupTour = require("./v1_routes/SetupTour.Routes");
 
+const classa = require("./v1_routes/class.Routes")
+const class1 = require("./v1_routes/classes.Routes")
+
 //LOG---
 //
 const app = express();
@@ -53,6 +56,9 @@ app.use("/v1/tour", TourRouter);
 app.use("/v1/thongke", ThongKeRouter);
 app.use("/v1/yeucautour", YeuCauTour);
 app.use("/v1/setuptour", SetupTour);
+
+app.use("/v1/class", classa)
+app.use("/v1/class1", class1)
 
 
 //LOG---
